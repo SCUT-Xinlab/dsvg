@@ -1,6 +1,8 @@
 
 results/
 config/
+dataset/brats2021/
+dataset/whole_head/
 vfm/
 *.pt
 *.ckpt
