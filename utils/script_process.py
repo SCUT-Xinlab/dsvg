@@ -38,7 +38,7 @@ class Subject:
         if match:
             return int(match.group(1))  # 提取数字部分并转换为整数
         else:
-            match = re.search(r'(\d+)',  os.listdir(self.folder_path)[0])
+            match = re.search(r'(\d+)[Ww]', self.folder_path)
             if match:
                 return int(match.group(1))
             else:
@@ -64,6 +64,19 @@ class Subject:
         }
 
         return result_paths
+    def get_volume_nodirectory(self, output_folder):
+        """
+        根据output_folder和name生成一个包含文件路径的字典作为result
+        :param output_folder: str, 输出文件夹路径
+        :param name: str, subject的名称
+        :return: dict, 包含不同路径的字典
+        """
+        name=self.get_name
+        # 基础result文件夹路径
+        volume_file = os.path.join(output_folder,f"{name}.nii.gz")
+
+
+        return volume_file 
     def get_mask_result(self, output_folder):
         name=self.get_name
         # 基础result文件夹路径
@@ -82,8 +95,9 @@ class Subject:
         result_folder=os.path.join(output_folder,fname)
         for filepath in self.file_list:  
             filename=os.path.basename(filepath).replace('.nii.gz','')
-            maskfolder=os.path.join(result_folder,filename)
-            maskpath=os.path.join(maskfolder,filename+'_seg.nii.gz')
+            #maskfolder=os.path.join(result_folder,filename)
+            #maskpath=os.path.join(maskfolder,filename+'_seg.nii.gz')
+            maskpath=os.path.join(result_folder,filename+'_seg.nii.gz')
             mask_output_path.append( maskpath)
             #filename=os.path.basename(filepath).replace('.nii.gz','_seg.nii.gz')
             #mask_output_path.append(os.path.join(result_folder,filename))
